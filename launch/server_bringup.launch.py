@@ -32,7 +32,7 @@ def generate_launch_description():
 
     ui_bringup_arg = DeclareLaunchArgument(
         "ui_bringup",
-        default_value="True",
+        default_value="False",
         description="turn on the default engine for UI window (Blockly site)"
     )
 
@@ -52,7 +52,7 @@ def generate_launch_description():
             {
                 "block_config": LaunchConfiguration("block_config"),
                 "port": LaunchConfiguration("port"),
-                "ui_bringup": LaunchConfiguration("ui_bringup"), # ~$ xdg-open http://192.168.1.29:5000
+                "ui_bringup": LaunchConfiguration("ui_bringup"),
             }
         ]
     )
