@@ -72,29 +72,29 @@ First, prepare the following environment before proceeding to the installation s
 ### Installation
 1. First, navigate to the `src` folder of your ROS 2 workspace.
     ```sh
-    cd ~/colcon_ws/src
+    $ cd ~/colcon_ws/src
     ```
 2. Clone the ROS package `blockly_ros2` into the `src` folder.
     ```sh
-    git clone -b jazzy-devel https://github.com/OnoFumiya/blockly_ros2.git
+    $ git clone -b jazzy-devel https://github.com/OnoFumiya/blockly_ros2.git
     ```
 3. Navigate into the cloned repository folder.
     ```sh
-    cd blockly_ros2
+    $ cd blockly_ros2
     ```
 4. Install the required dependencies.
     ```sh
-    bash install.sh
+    $ bash install.sh
     ```
 5. Build the package.
     ```sh
-    cd ~/colcon_ws/
+    $ cd ~/colcon_ws/
     ```
     ```sh
-    colcon build --symlink-install
+    $ colcon build --symlink-install
     ```    
     ```sh
-    source ~/colcon_ws/install/setup.sh
+    $ source ~/colcon_ws/install/setup.sh
     ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -105,13 +105,32 @@ Once the package has been successfully built, you can verify its operation using
 
 1. In [block_structure.yaml](config/block_structure.yaml), update each Block config. \
     Here, we will proceed using the current default settings. \
-    In addition, there are several parameters that can be set for [server_bringup.launch.py](launch/server_bringup.launch.py).\     
+    In addition, there are several parameters that can be set for [server_bringup.launch.py](launch/server_bringup.launch.py). \ 
     For detailed setup instructions, please refer to [this guide](#parameters).
 
-2. Once all the necessary changes are complete, you can launch [server_bringup.launch.py](launch/server_bringup.launch.py) to verify that it is working:
+2. Starting the required server \
+    Of the blocks defined in [1.], the “Service” and “Action” blocks will not start if the corresponding servers do not exist. \ 
+    ※This is because the system first checks whether the servers exist. \ 
+    Therefore, you must start the necessary nodes. \ 
+    When using the default blocks, the “turtlesim” and “fibonacci” servers must be running. \ 
+    The commands you'll need this time are as follows:
     ```sh
-    ros2 launch blockly_ros2 server_bringup.launch.py
+    $ ros2 run turtlesim turtlesim_node
     ```
+    ```sh
+    $ ros2 run action_tutorials_cpp fibonacci_action_server
+    ```
+
+3. Once all the necessary changes are complete, you can launch [server_bringup.launch.py](launch/server_bringup.launch.py) to verify that it is working:
+    ```sh
+    $ ros2 launch blockly_ros2 server_bringup.launch.py
+    ```
+
+    You can control the blocks in the browser that opens. When you press the “Send” button, the blocks will execute in order, starting with the “main” block.
+
+    You can also control the blocks by accessing the website linked to the displayed QR code using a device connected to the same Wi-Fi network.
+> [!NOTE]
+> The QR code image and its URL are each published to the topic once as “Transient Local” (QoS) to “/blockly_url_qrcode” (sensor_msgs/Image) and "/blockly_url_link" (std_msgs/String), respectively.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
