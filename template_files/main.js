@@ -32,97 +32,35 @@ Blockly.Blocks['main_block'] = {
 };
 
 
+/*
 // =========================
-// text
+// template (START)
 // =========================
 
-Blockly.Blocks['send_text'] = {
+Blockly.Blocks['template'] = {
 
   init: function () {
 
     this.appendDummyInput()
-      .appendField("テキスト") // Title
+      .appendField("String: ")
       .appendField(
-        new Blockly.FieldTextInput("Hello"), // default
-        "TEXT___DATA"
-      );
-
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-
-    this.setColour(230);
-  }
-};
-
-
-// =========================
-// number
-// =========================
-Blockly.Blocks['send_number'] = {
-
-  init: function () {
-
-    this.appendDummyInput()
-      .appendField("数値")
-      .appendField(
-        new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
-        "NUMBER___DATA"
-      );
-
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-
-    this.setColour(230);
-  }
-};
-
-
-// =========================
-// spawn
-// =========================
-
-Blockly.Blocks['send_spawn'] = {
-
-  init: function () {
-
-    this.appendDummyInput()
-      .appendField("Name: ")
-      .appendField(
-        new Blockly.FieldTextInput("ROBOT1"),
-        "SPAWN___NAME"
+        new Blockly.FieldTextInput("DEFAULT"),
+        "TEMPLATE___STRING"
       )
-      .appendField("X: ")
-      .appendField(
-        new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
-        "SPAWN___X"
-      )
-      .appendField("Y: ")
-      .appendField(
-        new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
-        "SPAWN___Y"
-      );
-
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-
-    this.setColour(230);
-  }
-};
-
-
-// =========================
-// fibonacci
-// =========================
-
-Blockly.Blocks['send_fibonacci'] = {
-
-  init: function () {
-
-    this.appendDummyInput()
-      .appendField("計算する回数")
+      .appendField("Int: ")
       .appendField(
         new Blockly.FieldNumber(0, -Infinity, Infinity, 1),
-        "FIBONACCI___ORDER"
+        "TEMPLATE___INT"
+      )
+      .appendField("Float: ")
+      .appendField(
+        new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
+        "TEMPLATE___FLOAT"
+      )
+      .appendField("Bool: ")
+      .appendField(
+        new Blockly.FieldCheckbox("TRUE"),
+        "TEMPLATE___BOOL"
       );
 
     this.setPreviousStatement(true);
@@ -131,6 +69,7 @@ Blockly.Blocks['send_fibonacci'] = {
     this.setColour(230);
   }
 };
+*/
 
 
 // =========================
@@ -268,8 +207,13 @@ async function sendToPython(block) {
 
   switch (block.type) {
 
-    case "send_text":
-      await fetch("/text", {
+    /*
+    // ===================
+    // template
+    // ===================
+
+    case "template":
+      await fetch("/template", {
 
         method: "POST",
 
@@ -278,61 +222,15 @@ async function sendToPython(block) {
         },
 
         body: JSON.stringify({
-          text___data: block.getFieldValue("TEXT___DATA")
+          template___string: block.getFieldValue("TEMPLATE___STRING"),
+          template___int: block.getFieldValue("TEMPLATE___INT"),
+          template___float: block.getFieldValue("TEMPLATE___FLOAT"),
+          template___bool: block.getFieldValue("TEMPLATE___BOOL"),
         })
       });
 
       break;
-
-    case "send_number":
-      await fetch("/number", {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          number___data: block.getFieldValue("NUMBER___DATA")
-        })
-      });
-
-      break;
-
-    case "send_spawn":
-      await fetch("/spawn", {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          spawn___x   : block.getFieldValue("SPAWN___X"),
-          spawn___y   : block.getFieldValue("SPAWN___Y"),
-          spawn___name: block.getFieldValue("SPAWN___NAME")
-        })
-      });
-
-      break;
-
-    case "send_fibonacci":
-      await fetch("/fibonacci", {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          fibonacci___order: block.getFieldValue("FIBONACCI___ORDER")
-        })
-      });
-
-      break;
+    */
   }
 }
 
@@ -350,20 +248,32 @@ async function executeBlock(block) {
 
     switch (block.type) {
 
+      /*
       // ===================
-      // text
+      // template
       // ===================
 
-      case "send_text":
+      case "template":
 
         // 光らせる
-        oldColor =
-          await highlight(block);
+        oldColor = await highlight(block);
 
-        const text___data =
-          block.getFieldValue("TEXT___DATA");
+        const template___string =
+          block.getFieldValue("TEMPLATE___STRING");
 
-        console.log(text___data);
+        const template___int =
+          block.getFieldValue("TEMPLATE___INT");
+
+        const template___float =
+          block.getFieldValue("TEMPLATE___FLOAT");
+
+        const template___bool =
+          block.getFieldValue("TEMPLATE___BOOL");
+
+        console.log(template___string);
+        console.log(template___int);
+        console.log(template___float);
+        console.log(template___bool);
 
         await sendToPython(block);
 
@@ -371,80 +281,7 @@ async function executeBlock(block) {
         block.setColour(oldColor);
 
         break;
-
-      // ===================
-      // number
-      // ===================
-
-      case "send_number":
-
-        // 光らせる
-        oldColor =
-          await highlight(block);
-
-        const number___data =
-          block.getFieldValue("NUMBER___DATA");
-
-        console.log(number___data);
-
-        await sendToPython(block);
-
-        // 元色へ戻す
-        block.setColour(oldColor);
-
-        break;
-
-      // ===================
-      // spawn
-      // ===================
-
-      case "send_spawn":
-
-        // 光らせる
-        oldColor =
-          await highlight(block);
-
-        const spawn___x =
-          block.getFieldValue("SPAWN___X");
-
-        const spawn___y =
-          block.getFieldValue("SPAWN___Y");
-
-        const spawn___name =
-          block.getFieldValue("SPAWN___NAME");
-
-        console.log(spawn___x);
-        console.log(spawn___y);
-        console.log(spawn___name);
-
-        await sendToPython(block);
-
-        // 元色へ戻す
-        block.setColour(oldColor);
-
-        break;
-
-      // ===================
-      // fibonacci
-      // ===================
-
-      case "send_fibonacci":
-
-        // 光らせる
-        oldColor =
-          await highlight(block);
-
-        const fibonacci___order =
-          block.getFieldValue("FIBINACCI");
-
-        console.log(fibonacci___order);
-
-        await sendToPython(block);
-
-        // 元色へ戻す
-        block.setColour(oldColor);
-
-        break;
+      */
 
       // ===================
       // if

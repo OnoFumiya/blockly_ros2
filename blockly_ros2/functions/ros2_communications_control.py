@@ -2,6 +2,9 @@ import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
 
+from std_msgs.msg import String
+from sensor_msgs.msg import Image
+
 import os
 import time
 
@@ -12,6 +15,21 @@ import yaml
 class CommunicationsControl():
     def __init__(self, node):
         self.node = node
+
+        qos_policy = rclpy.qos.QoSProfile(
+            reliability=rclpy.qos.ReliabilityPolicy.RELIABLE,
+            history=rclpy.qos.HistoryPolicy.KEEP_LAST,
+            durability=rclpy.qos.DurabilityPolicy.TRANSIENT_LOCAL,
+            depth=1
+        )
+
+        self.url_link_pub = self.node.create_publisher(String, "blockly_url_link", qos_policy)
+        self.url_qr_pub = self.node.create_publisher(Image, "blockly_url_qrcode", qos_policy)
+
+
+    def uipath_publish(self, str_data, img_data):
+        self.url_link_pub.publish(String(data=str_data))
+        self.url_qr_pub.publish(img_data)
 
 
     def topic_run(self, controller, send_msg, msg_type):
