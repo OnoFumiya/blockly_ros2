@@ -105,14 +105,15 @@ Once the package has been successfully built, you can verify its operation using
 
 1. In [block_structure.yaml](config/block_structure.yaml), update each Block config. \
     Here, we will proceed using the current default settings. \
-    In addition, there are several parameters that can be set for [server_bringup.launch.py](launch/server_bringup.launch.py). \ 
+    In addition, there are several parameters that can be set for [server_bringup.launch.py](launch/server_bringup.launch.py). \
     For detailed setup instructions, please refer to [this guide](#parameters).
 
 2. Starting the required server \
-    Of the blocks defined in [1.], the “Service” and “Action” blocks will not start if the corresponding servers do not exist. \ 
-    ※This is because the system first checks whether the servers exist. \ 
-    Therefore, you must start the necessary nodes. \ 
-    When using the default blocks, the “turtlesim” and “fibonacci” servers must be running. \ 
+    Of the blocks defined in [1.], the “Service” and “Action” blocks will not start if the corresponding servers do not exist. \
+    ※This is because the system first checks whether the servers exist. 
+    Therefore, you must start the necessary nodes.
+
+    When using the default blocks, the “turtlesim” and “fibonacci” servers must be running.
     The commands you'll need this time are as follows:
     ```sh
     $ ros2 run turtlesim turtlesim_node
