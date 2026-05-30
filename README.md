@@ -124,7 +124,7 @@ Once the package has been successfully built, you can verify its operation using
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Milestones
-* There may be updates to the launch parameters due to changes in `image_to_position`. : Resolved
+
 
 Please check the [Issue page][issues-url] for current bugs and feature requests.
 
