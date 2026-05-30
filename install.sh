@@ -2,8 +2,6 @@
 echo "╔══╣ Setup: Blockly ROS2 (STARTING) ╠══╗"
 
 sudo apt update
-sudo apt install -y \
-    xdg-utils
 
 # System Environment
 ENV="$(uname -m)"
@@ -15,19 +13,25 @@ if [[ ${ENV} == *"x86_64"* ]]; then
     sudo rm google-chrome-stable_current_amd64.deb
 else
     sudo rm -f /etc/apt/preferences.d/chromium-deb
-    sudo tee /etc/apt/preferences.d/chromium-deb > /dev/null \<\<\- 'EOF'
-        Package: chromium*
-        Pin: release o=LP-PPA-xtradeb-apps
-        Pin-Priority: 500
+    sudo tee /etc/apt/preferences.d/chromium-deb > /dev/null <<- 'EOF'
+Package: chromium*
+Pin: release o=LP-PPA-xtradeb-apps
+Pin-Priority: 500
 
-        Package: chromium*
-        Pin: release o=Ubuntu*
-        Pin-Priority: -1
-        EOF
+Package: chromium*
+Pin: release o=Ubuntu*
+Pin-Priority: -1
+EOF
     sudo add-apt-repository -y ppa:xtradeb/apps
     sudo apt update
-    sudo apt install -y chromium
+    sudo apt install -y \
+        chromium \
+        firefox
 fi
+
+sudo apt update
+sudo apt install -y \
+    xdg-utils
 
 pip3 install qrcode[pil] --break-system-packages
 python3 -m pip install --break-system-packages \
