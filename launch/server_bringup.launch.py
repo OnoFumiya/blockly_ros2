@@ -32,7 +32,7 @@ def generate_launch_description():
 
     ui_bringup_arg = DeclareLaunchArgument(
         "ui_bringup",
-        default_value="False",
+        default_value="True",
         description="turn on the default engine for UI window (Blockly site)"
     )
 
