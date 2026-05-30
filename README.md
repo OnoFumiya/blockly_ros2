@@ -1,2 +1,4 @@
-# blockly_ros2
-A ROS 2 package providing a visual programming interface powered by Google's Blockly.
+# BLOCKLY ROS2
+<!-- A ROS 2 package providing a visual programming interface powered by Google's Blockly. -->
+
+This repository provides a ROS 2 package that integrates with Google's Blockly, a widely recognized open-source library for building visual, block-based programming interfaces. By bridging Blockly's intuitive drag-and-drop environment with the powerful capabilities of ROS 2, this project allows users to develop, control, and orchestrate robotic behaviors without writing complex traditional code. It is ideal for educational purposes, rapid prototyping, and making robotics accessible to beginners.

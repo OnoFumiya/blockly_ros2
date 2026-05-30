@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <script src="https://unpkg.com/blockly@10.4.3/blockly.min.js"></script>
+  <script src="https://unpkg.com/blockly@10.4.3/javascript_compressed.js"></script>
+
+</head>
+
+<body>
+
+<h1>Blockly ROS2</h1>
+
+<div id="blocklyDiv"
+     style="height: 600px; width: 1200px;">
+</div>
+
+<xml id="toolbox" style="display:none">
+
+  <block type="main_block"></block>
+
+  <block type="send_text"></block>
+
+  <block type="send_number"></block>
+
+  <block type="send_spawn"></block>
+
+  <block type="send_fibonacci"></block>
+
+  <block type="if_block"></block>
+
+  <block type="if_else_block"></block>
+
+  <block type="repeat_block"></block>
+
+  <block type="function_block"></block>
+
+  <block type="call_function_block"></block>
+
+</xml>
+
+<button onclick="runCode()">送信</button>
+
+<!-- <script src="/home/fumiya/colcon_ws/install/blockly_ros2/share/blockly_ros2/blockly_ros2/static/main.js"></script> -->
+<script src="static/main.js"></script>
+
+</body>
+</html>

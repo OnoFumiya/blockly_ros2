@@ -1,0 +1,70 @@
+#######
+# value_rules:以下のにROSメッセージのメンバ変数にアクセスできる。
+# 接頭キーはTopic/Service/Action名とする
+# 1ROSメッセージ(接頭キーごと)で1ブロックとなる
+# 
+# typeに設定可能なものは[整数:int, 浮動小数点:float, 文字列:string, 時間[s]:time]
+# なおtimeは`builtin_interfaces/Duration`型に指定可能。
+#######
+
+
+##############
+# ~~~ Topic (Publisher)の例 ~~~
+# ターミナル上 : `~$ ros2 topic pub /text std_msgs/msg/String 'data: "Hello World"' --once`
+# 上記と同様のコマンドをするブロックが以下となる (※"Hello World"はUIで入力する)
+# value_rules:以下、メンバ変数
+#    "string"型で'data'をブロック上に置く。UI上のブロックでは"テキスト"と表記
+##############
+text:
+    msg_type: "std_msgs/String"
+    mode: "topic"
+    value_rules:
+        data: {type: "string", name: "テキスト"}
+
+
+##############
+# ~~~ Topic (Publisher)の例 ~~~
+# ターミナル上 : `~$ ros2 topic pub /text std_msgs/msg/Float64 'data: 1.57' --once`
+# 上記と同様のコマンドをするブロックが以下となる (※1.57はUIで入力する)
+# value_rules:以下、メンバ変数
+#    "foat"型で'data'をブロック上に置く。UI上のブロックでは"数値"と表記
+##############
+number:
+    msg_type: "std_msgs/msg/Float64"  # msgやsrvやactionを入れても良い
+    mode: "topic"
+    value_rules:
+        data: {type: "float", "name": "数値"}
+
+
+##############
+# ~~~ Service (Client)の例 ~~~
+# ターミナル上 : `~$ ros2 service call /spawn turtlesim/srv/Spawn '{x: 5.2, y: 5.8, theta: 0.0, name: "ROBOT1"}'`
+# 上記と同様のコマンドをするブロックが以下となる (※5.2, 5.8, "ROBOT1"はUIで入力する。thetaなにもしないため定義しない。)
+# TODO: default値(Blockにならない値)の設定
+# value_rules:以下、メンバ変数
+#    "float"型で'x'をブロック上に置く。UI上のブロックでは"X座標"と表記
+#    "float"型で'y'をブロック上に置く。UI上のブロックでは"Y座標"と表記
+#    "string"型で'name'をブロック上に置く。UI上のブロックでは"名前"と表記
+##############
+spawn: 
+    msg_type: "turtlesim.Spawn"   # 区切りは"."でも良い
+    mode: "service"
+    value_rules: 
+        x: {"type": "float", "name": "X座標"}
+        y: {"type": "float", "name": "Y座標"}
+        name: {"type": "string", "name": "名前"}
+
+
+##############
+# ~~~ Action (Client)の例 ~~~
+# ターミナル上 : `~$ ros2 action send_goal /fibonacci action_tutorials_interfaces/action/Fibonacci "order: 1"`
+# 上記と同様のコマンドをするブロックが以下となる (※5.2, 5.8, "ROBOT1"はUIで入力する。thetaなにもしないため定義しない。)
+# TODO: default値(Blockにならない値)の設定
+# value_rules:以下、メンバ変数
+#    "int"型で'order'をブロック上に置く。UI上のブロックでは"計算したい回数"と表記
+##############
+"/fibonacci": # 明示的にGlobal化("/")させることも可能
+    msg_type: "action_tutorials_interfaces/Fibonacci"
+    mode: "action"
+    value_rules:
+        order: {"type": "int", "name": "計算したい回数"}
