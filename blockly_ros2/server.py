@@ -17,6 +17,7 @@ from cv_bridge import CvBridge
 from .functions import create_ros_msg
 from .functions import ros2_communications_control
 from .functions import network_address_manager
+from .functions import create_html_and_javascript
 
 from flask import Flask
 from flask import request
@@ -44,6 +45,7 @@ class BlocklyServer(Node):
         self.declare_parameter("ui_bringup", False)
 
         self.comm_ctrl = ros2_communications_control.CommunicationsControl(self)
+        create_html_and_javascript.get_directory_path()
 
         # Get Parameter
         block_config = self.get_parameter("block_config").get_parameter_value().string_value
