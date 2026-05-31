@@ -16,16 +16,16 @@ Blockly.Blocks['send_/*file_name*/'] = {
   init: function () {
 
     this.appendDummyInput()
-      /*LIST_START{DATA_NAME}*/
-      .appendField("/*Allow*/")
+      /*LIST_START:DATA_NAME*/
+      .appendField("/*name_name*/")
       .appendField(
-        /*IF_START{MSG_TYPE}*/new Blockly.FieldTextInput(""),/*IF_END{MSG_TYPE}*/
-        /*IF_START{MSG_TYPE}*/new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),/*IF_END{MSG_TYPE}*/
-        /*IF_START{MSG_TYPE}*/new Blockly.FieldNumber(0, -Infinity, Infinity, 1),/*IF_END{MSG_TYPE}*/
-        /*IF_START{MSG_TYPE}*/new Blockly.FieldCheckbox("TRUE"),/*IF_END{MSG_TYPE}*/
+        /*IF_START:TYPE_NAME*//*string*/new Blockly.FieldTextInput(""),/*IF_END:TYPE_NAME*/
+        /*IF_START:TYPE_NAME*//*float*/new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),/*IF_END:TYPE_NAME*/
+        /*IF_START:TYPE_NAME*//*int*/new Blockly.FieldNumber(0, -Infinity, Infinity, 1),/*IF_END:TYPE_NAME*/
+        /*IF_START:TYPE_NAME*//*bool*/new Blockly.FieldCheckbox("TRUE"),/*IF_END:TYPE_NAME*/
         "/*FILE_NAME*/___/*DATA_NAME*/"
       )
-      /*LIST_END{DATA_NAME}*/;
+      /*LIST_END:DATA_NAME*/;
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -51,9 +51,9 @@ async function send/*FileName*/(block) {
     },
 
     body: JSON.stringify({
-      /*LIST_START{DATA_NAME}*/
+      /*LIST_START:DATA_NAME*/
       /*file_name*/___/*data_name*/: block.getFieldValue("/*FILE_NAME*/___/*DATA_NAME*/"),
-      /*LIST_END{DATA_NAME}*/
+      /*LIST_END:DATA_NAME*/
     })
   });
 }
@@ -69,14 +69,14 @@ async function execute/*FileName*/(block) {
   const oldColor =
     await highlight(block);
 
-  /*LIST_START{DATA_NAME}*/
+  /*LIST_START:DATA_NAME*/
   const /*file_name*/___/*data_name*/ =
     block.getFieldValue("/*FILE_NAME*/___/*DATA_NAME*/");
-  /*LIST_END{DATA_NAME}*/
+  /*LIST_END:DATA_NAME*/
 
-  /*LIST_START{DATA_NAME}*/
+  /*LIST_START:DATA_NAME*/
   console.log(/*file_name*/___/*data_name*/);
-  /*LIST_END{DATA_NAME}*/
+  /*LIST_END:DATA_NAME*/
 
   await send/*FileName*/(block);
 

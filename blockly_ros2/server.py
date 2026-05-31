@@ -45,7 +45,7 @@ class BlocklyServer(Node):
         self.declare_parameter("ui_bringup", False)
 
         self.comm_ctrl = ros2_communications_control.CommunicationsControl(self)
-        create_html_and_javascript.get_directory_path()
+        self.base_dir_path, self.create_dir_path = create_html_and_javascript.get_directory_path()
 
         # Get Parameter
         block_config = self.get_parameter("block_config").get_parameter_value().string_value
@@ -103,6 +103,7 @@ class BlocklyServer(Node):
 
     def buirding_rules(self):
 
+        value_rules_with_all = {}
         for topic_name, info in self.controllers.items():
 
             """
@@ -121,7 +122,33 @@ class BlocklyServer(Node):
             }
             """
 
-            info["value_rules"] = create_ros_msg.build_tree("", info["value_rules"], {"type": None, "name": None})
+            value_rules_with_all[topic_name] = create_ros_msg.build_tree("", info["value_rules"], {"type": None, "name": None})
+            info["value_rules"] = copy.deepcopy(value_rules_with_all[topic_name])
+            for key in info["value_rules"].keys():
+                info["value_rules"][key] = info["value_rules"][key]["type"]
+
+        create_html_and_javascript.clear_dir(self.create_dir_path + "/custom_blocks")
+
+        global_replaces = {}
+        for key in value_rules_with_all.keys():
+            global_replaces[key.replace("/", "")] = {"name": key.replace("/", "")}
+        print("======================")
+        print(global_replaces)
+        print("======================")
+        create_html_and_javascript.create_file(
+            self.base_dir_path + "/index.html",
+            self.create_dir_path,
+            "index.html",
+            global_replaces
+        )
+
+        for topic_name in value_rules_with_all.keys():
+            create_html_and_javascript.create_file(
+                self.base_dir_path + "/custom_block.js",
+                self.create_dir_path + "/custom_blocks",
+                topic_name.replace("/", "") + ".js",
+                value_rules_with_all[topic_name]
+            )
 
 
     def set_url_rule(self):

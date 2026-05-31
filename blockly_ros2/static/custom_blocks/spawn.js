@@ -16,21 +16,34 @@ Blockly.Blocks['send_spawn'] = {
   init: function () {
 
     this.appendDummyInput()
+      
       .appendField("Name: ")
       .appendField(
-        new Blockly.FieldTextInput("ROBOT1"),
+        new Blockly.FieldTextInput(""),
+        
+        
+        
         "SPAWN___NAME"
       )
-      .appendField("X: ")
+      
+      .appendField("X座標")
       .appendField(
+        
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
+        
+        
         "SPAWN___X"
       )
-      .appendField("Y: ")
+      
+      .appendField("Y座標")
       .appendField(
+        
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
+        
+        
         "SPAWN___Y"
-      );
+      )
+      ;
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -56,9 +69,13 @@ async function sendSpawn(block) {
     },
 
     body: JSON.stringify({
+      
       spawn___name: block.getFieldValue("SPAWN___NAME"),
+      
       spawn___x: block.getFieldValue("SPAWN___X"),
+      
       spawn___y: block.getFieldValue("SPAWN___Y"),
+      
     })
   });
 }
@@ -74,18 +91,24 @@ async function executeSpawn(block) {
   const oldColor =
     await highlight(block);
 
+  
   const spawn___name =
     block.getFieldValue("SPAWN___NAME");
-
+  
   const spawn___x =
     block.getFieldValue("SPAWN___X");
-
+  
   const spawn___y =
     block.getFieldValue("SPAWN___Y");
+  
 
+  
   console.log(spawn___name);
+  
   console.log(spawn___x);
+  
   console.log(spawn___y);
+  
 
   await sendSpawn(block);
 

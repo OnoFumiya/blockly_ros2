@@ -16,11 +16,16 @@ Blockly.Blocks['send_text'] = {
   init: function () {
 
     this.appendDummyInput()
+      
       .appendField("テキスト")
       .appendField(
-        new Blockly.FieldTextInput("Hello"),
+        new Blockly.FieldTextInput(""),
+        
+        
+        
         "TEXT___DATA"
-      );
+      )
+      ;
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -46,7 +51,9 @@ async function sendText(block) {
     },
 
     body: JSON.stringify({
+      
       text___data: block.getFieldValue("TEXT___DATA"),
+      
     })
   });
 }
@@ -62,14 +69,19 @@ async function executeText(block) {
   const oldColor =
     await highlight(block);
 
+  
   const text___data =
     block.getFieldValue("TEXT___DATA");
+  
 
+  
   console.log(text___data);
+  
 
   await sendText(block);
 
   block.setColour(oldColor);
+
 }
 
 

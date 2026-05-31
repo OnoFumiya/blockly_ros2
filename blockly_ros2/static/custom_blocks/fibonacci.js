@@ -16,11 +16,16 @@ Blockly.Blocks['send_fibonacci'] = {
   init: function () {
 
     this.appendDummyInput()
-      .appendField("計算する回数")
+      
+      .appendField("計算したい回数 >> ")
       .appendField(
+        
+        
         new Blockly.FieldNumber(0, -Infinity, Infinity, 1),
+        
         "FIBONACCI___ORDER"
-      );
+      )
+      ;
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -46,7 +51,9 @@ async function sendFibonacci(block) {
     },
 
     body: JSON.stringify({
+      
       fibonacci___order: block.getFieldValue("FIBONACCI___ORDER"),
+      
     })
   });
 }
@@ -62,14 +69,19 @@ async function executeFibonacci(block) {
   const oldColor =
     await highlight(block);
 
+  
   const fibonacci___order =
-    block.getFieldValue("FIBINACCI___ORDER");
+    block.getFieldValue("FIBONACCI___ORDER");
+  
 
+  
   console.log(fibonacci___order);
+  
 
   await sendFibonacci(block);
 
   block.setColour(oldColor);
+
 }
 
 

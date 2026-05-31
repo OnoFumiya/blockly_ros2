@@ -27,13 +27,13 @@ text:
 # ターミナル上 : `~$ ros2 topic pub /text std_msgs/msg/Float64 'data: 1.57' --once`
 # 上記と同様のコマンドをするブロックが以下となる (※1.57はUIで入力する)
 # value_rules:以下、メンバ変数
-#    "foat"型で'data'をブロック上に置く。UI上のブロックでは"数値"と表記
+#    "foat"型で'data'をブロック上に置く。UI上のブロックでは"数値: "と表記
 ##############
 number:
     msg_type: "std_msgs/msg/Float64"  # msgやsrvやactionを入れても良い
     mode: "topic"
     value_rules:
-        data: {type: "float", "name": "数値"}
+        data: {type: "float", "name": "数値: "}
 
 
 ##############
@@ -42,17 +42,17 @@ number:
 # 上記と同様のコマンドをするブロックが以下となる (※5.2, 5.8, "ROBOT1"はUIで入力する。thetaなにもしないため定義しない。)
 # TODO: default値(Blockにならない値)の設定
 # value_rules:以下、メンバ変数
+#    "string"型で'name'をブロック上に置く。UI上のブロックでは"Name: "と表記
 #    "float"型で'x'をブロック上に置く。UI上のブロックでは"X座標"と表記
 #    "float"型で'y'をブロック上に置く。UI上のブロックでは"Y座標"と表記
-#    "string"型で'name'をブロック上に置く。UI上のブロックでは"名前"と表記
 ##############
 spawn: 
     msg_type: "turtlesim.Spawn"   # 区切りは"."でも良い
     mode: "service"
     value_rules: 
+        name: {"type": "string", "name": "Name: "}
         x: {"type": "float", "name": "X座標"}
         y: {"type": "float", "name": "Y座標"}
-        name: {"type": "string", "name": "名前"}
 
 
 ##############
@@ -61,10 +61,10 @@ spawn:
 # 上記と同様のコマンドをするブロックが以下となる (※5.2, 5.8, "ROBOT1"はUIで入力する。thetaなにもしないため定義しない。)
 # TODO: default値(Blockにならない値)の設定
 # value_rules:以下、メンバ変数
-#    "int"型で'order'をブロック上に置く。UI上のブロックでは"計算したい回数"と表記
+#    "int"型で'order'をブロック上に置く。UI上のブロックでは"計算したい回数 >> "と表記
 ##############
 "/fibonacci": # 明示的にGlobal化("/")させることも可能
     msg_type: "action_tutorials_interfaces/Fibonacci"
     mode: "action"
     value_rules:
-        order: {"type": "int", "name": "計算したい回数"}
+        order: {"type": "int", "name": "計算したい回数 >> "}

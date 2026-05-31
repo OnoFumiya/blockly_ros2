@@ -16,11 +16,16 @@ Blockly.Blocks['send_number'] = {
   init: function () {
 
     this.appendDummyInput()
-      .appendField("数値")
+      
+      .appendField("数値: ")
       .appendField(
+        
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
+        
+        
         "NUMBER___DATA"
-      );
+      )
+      ;
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -46,7 +51,9 @@ async function sendNumber(block) {
     },
 
     body: JSON.stringify({
+      
       number___data: block.getFieldValue("NUMBER___DATA"),
+      
     })
   });
 }
@@ -62,14 +69,19 @@ async function executeNumber(block) {
   const oldColor =
     await highlight(block);
 
+  
   const number___data =
     block.getFieldValue("NUMBER___DATA");
+  
 
+  
   console.log(number___data);
+  
 
   await sendNumber(block);
 
   block.setColour(oldColor);
+
 }
 
 

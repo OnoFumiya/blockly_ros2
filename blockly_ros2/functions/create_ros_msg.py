@@ -81,7 +81,7 @@ def build_tree(prefix, msg, template_val):
 
         # 最終ノード判定
         if isinstance(value, dict) and (value.keys() == template_val.keys()):
-            tree[current_key] = value["type"]
+            tree[current_key] = value
 
         # まだネストが続く場合
         elif isinstance(value, dict):

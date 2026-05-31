@@ -21,9 +21,9 @@
 
   <block type="main_block"></block>
 
-  /*LIST_START{DATA_NAME}*/
-  <block template="default"></block>
-  /*LIST_END{DATA_NAME}*/
+  /*LIST_START:DATA_NAME*/
+  <block type="send_/*data_name*/"></block>
+  /*LIST_END:DATA_NAME*/
 
   <block type="if_block"></block>
 
@@ -39,7 +39,7 @@
 
 <button onclick="runCode()">送信</button>
 
-<script src="static/main.js"></script>
+<script type="module" src="static/main.js"></script>
 
 </body>
 </html>
