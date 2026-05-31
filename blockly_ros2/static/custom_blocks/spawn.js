@@ -56,9 +56,9 @@ async function sendSpawn(block) {
     },
 
     body: JSON.stringify({
+      spawn___name: block.getFieldValue("SPAWN___NAME"),
       spawn___x: block.getFieldValue("SPAWN___X"),
       spawn___y: block.getFieldValue("SPAWN___Y"),
-      spawn___name: block.getFieldValue("SPAWN___NAME"),
     })
   });
 }
@@ -74,14 +74,14 @@ async function executeSpawn(block) {
   const oldColor =
     await highlight(block);
 
+  const spawn___name =
+    block.getFieldValue("SPAWN___NAME");
+
   const spawn___x =
     block.getFieldValue("SPAWN___X");
 
   const spawn___y =
     block.getFieldValue("SPAWN___Y");
-
-  const spawn___name =
-    block.getFieldValue("SPAWN___NAME");
 
   console.log(spawn___x);
   console.log(spawn___y);
