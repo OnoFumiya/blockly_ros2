@@ -56,9 +56,9 @@ async function sendSpawn(block) {
     },
 
     body: JSON.stringify({
-      spawn___x   : block.getFieldValue("SPAWN___X"),
-      spawn___y   : block.getFieldValue("SPAWN___Y"),
-      spawn___name: block.getFieldValue("SPAWN___NAME")
+      spawn___x: block.getFieldValue("SPAWN___X"),
+      spawn___y: block.getFieldValue("SPAWN___Y"),
+      spawn___name: block.getFieldValue("SPAWN___NAME"),
     })
   });
 }

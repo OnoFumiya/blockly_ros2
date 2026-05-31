@@ -46,7 +46,7 @@ async function sendFibonacci(block) {
     },
 
     body: JSON.stringify({
-      fibonacci___order: block.getFieldValue("FIBONACCI___ORDER")
+      fibonacci___order: block.getFieldValue("FIBONACCI___ORDER"),
     })
   });
 }
