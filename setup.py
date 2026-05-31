@@ -15,8 +15,6 @@ setup(
         (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
         (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
         (os.path.join('share', package_name, 'img'), glob('img/*')),
-        (os.path.join('share', package_name, 'template_files'), glob('template_files/*')),
-        (os.path.join('share', package_name, 'blockly_ros2', 'static'), glob('blockly_ros2/static/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
