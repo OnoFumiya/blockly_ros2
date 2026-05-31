@@ -19,6 +19,8 @@ Blockly.Blocks['send_text'] = {
       
       .appendField("テキスト")
       .appendField(
+        
+        
         new Blockly.FieldTextInput(""),
         
         

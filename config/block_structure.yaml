@@ -3,8 +3,11 @@
 # 接頭キーはTopic/Service/Action名とする
 # 1ROSメッセージ(接頭キーごと)で1ブロックとなる
 # 
-# typeに設定可能なものは[整数:int, 浮動小数点:float, 文字列:string, 時間[s]:time]
+# typeに設定可能なものは[整数:int, 浮動小数点:float, 文字列:string, True/False: bool, ラジアン入力を弧度入力[deg]: deg, 時間[s]:time]
 # なおtimeは`builtin_interfaces/Duration`型に指定可能。
+# また、degに関しては、floatとすればそのまま扱われるが、degとすることでradを弧度法入力させることができるようになる。
+# つまりfloatモードで3.14とUIに入力することとdegモードで180と入力することが同値となるよう、degモードでは"×(180/π)"した値がシステムに反映される。
+# List表現については今後対応する。
 #######
 
 

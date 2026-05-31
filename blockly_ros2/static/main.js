@@ -1,7 +1,12 @@
+
 import "./custom_blocks/text.js";
+
 import "./custom_blocks/number.js";
+
 import "./custom_blocks/spawn.js";
+
 import "./custom_blocks/fibonacci.js";
+
 import "./core/blocks.js";
 import {
   executeBlock,

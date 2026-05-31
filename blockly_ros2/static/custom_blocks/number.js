@@ -23,6 +23,8 @@ Blockly.Blocks['send_number'] = {
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
         
         
+        
+        
         "NUMBER___DATA"
       )
       ;

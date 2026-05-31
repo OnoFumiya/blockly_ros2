@@ -19,9 +19,11 @@ Blockly.Blocks['send_fibonacci'] = {
       
       .appendField("計算したい回数 >> ")
       .appendField(
-        
-        
         new Blockly.FieldNumber(0, -Infinity, Infinity, 1),
+        
+        
+        
+        
         
         "FIBONACCI___ORDER"
       )

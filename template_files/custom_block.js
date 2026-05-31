@@ -19,10 +19,12 @@ Blockly.Blocks['send_/*file_name*/'] = {
       /*LIST_START:DATA_NAME*/
       .appendField("/*name_name*/")
       .appendField(
-        /*IF_START:TYPE_NAME*//*string*/new Blockly.FieldTextInput(""),/*IF_END:TYPE_NAME*/
-        /*IF_START:TYPE_NAME*//*float*/new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),/*IF_END:TYPE_NAME*/
         /*IF_START:TYPE_NAME*//*int*/new Blockly.FieldNumber(0, -Infinity, Infinity, 1),/*IF_END:TYPE_NAME*/
+        /*IF_START:TYPE_NAME*//*float*/new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),/*IF_END:TYPE_NAME*/
+        /*IF_START:TYPE_NAME*//*string*/new Blockly.FieldTextInput(""),/*IF_END:TYPE_NAME*/
         /*IF_START:TYPE_NAME*//*bool*/new Blockly.FieldCheckbox("TRUE"),/*IF_END:TYPE_NAME*/
+        /*IF_START:TYPE_NAME*//*deg*/new Blockly.FieldNumber(0, -Infinity, Infinity, 1),/*IF_END:TYPE_NAME*/
+        /*IF_START:TYPE_NAME*//*time*/new Blockly.FieldNumber(0.0, 0.0, Infinity, 0.001),/*IF_END:TYPE_NAME*/
         "/*FILE_NAME*/___/*DATA_NAME*/"
       )
       /*LIST_END:DATA_NAME*/;

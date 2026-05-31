@@ -19,6 +19,8 @@ Blockly.Blocks['send_spawn'] = {
       
       .appendField("Name: ")
       .appendField(
+        
+        
         new Blockly.FieldTextInput(""),
         
         
@@ -32,6 +34,8 @@ Blockly.Blocks['send_spawn'] = {
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
         
         
+        
+        
         "SPAWN___X"
       )
       
@@ -39,6 +43,8 @@ Blockly.Blocks['send_spawn'] = {
       .appendField(
         
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
+        
+        
         
         
         "SPAWN___Y"

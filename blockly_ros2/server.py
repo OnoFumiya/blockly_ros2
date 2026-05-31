@@ -122,7 +122,12 @@ class BlocklyServer(Node):
             }
             """
 
-            value_rules_with_all[topic_name] = create_ros_msg.build_tree("", info["value_rules"], {"type": None, "name": None})
+            # print(info["value_rules"])
+            template_value = {"type": None, "name": None}
+            if (info["value_rules"].keys() == template_value.keys()):
+                value_rules_with_all[topic_name] = {"": info["value_rules"]}
+            else:
+                value_rules_with_all[topic_name] = create_ros_msg.build_tree("", info["value_rules"], template_value)
             info["value_rules"] = copy.deepcopy(value_rules_with_all[topic_name])
             for key in info["value_rules"].keys():
                 info["value_rules"][key] = info["value_rules"][key]["type"]
@@ -132,13 +137,18 @@ class BlocklyServer(Node):
         global_replaces = {}
         for key in value_rules_with_all.keys():
             global_replaces[key.replace("/", "")] = {"name": key.replace("/", "")}
-        print("======================")
-        print(global_replaces)
-        print("======================")
+
         create_html_and_javascript.create_file(
             self.base_dir_path + "/index.html",
             self.create_dir_path,
             "index.html",
+            global_replaces
+        )
+
+        create_html_and_javascript.create_file(
+            self.base_dir_path + "/main.js",
+            self.create_dir_path,
+            "main.js",
             global_replaces
         )
 

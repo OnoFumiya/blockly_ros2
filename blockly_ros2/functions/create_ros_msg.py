@@ -1,5 +1,6 @@
 import re
 import importlib
+import math
 
 def create_interface(module_command, mode="msg"):
     command_set = re.split("[./]", module_command)
@@ -48,12 +49,31 @@ def set_members(data, msg, members, topic_name):
             value = float(data.get(get_namespace, 0.0))
         elif ((msg_type == "string") or (msg_type == "str") or (msg_type == "char")):
             value = str(data.get(get_namespace, ""))
+        elif ((msg_type == "bool") or (msg_type == "boolean")):
+            val = data.get(get_namespace, True)
+            if ((val == "TRUE") or (val == "True") or (val == "true")):
+                value = True
+            else:
+                value = False
+        elif ((msg_type == "time")):
+            from builtin_interfaces.msg import Duration
+            val = float(data.get(get_namespace, 0.0))
+            frac, integral = math.modf(val)
+            sec = int(integral)
+            nanosec = round(frac * 1_000_000_000)
+            if nanosec >= 1_000_000_000:
+                sec += 1
+                nanosec -= 1_000_000_000
+            value = Duration(sec=sec, nanosec=nanosec)
         else:
             pass
             # TODO: List of (int or float or str)
         
         if (value is not None):
-            setattr(target, mem_dict[-1], value)
+            if (mem_dict[-1] == ""):
+                target = value
+            else:
+                setattr(target, mem_dict[-1], value)
 
     return target
 

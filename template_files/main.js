@@ -1,6 +1,6 @@
-/*LIST_START{DATA_NAME}*/
-import "./custom_blocks//*file_name*/.js";
-/*LIST_END{DATA_NAME}*/
+/*LIST_START:DATA_NAME*/
+import "./custom_blocks//*data_name*/.js";
+/*LIST_END:DATA_NAME*/
 import "./core/blocks.js";
 import {
   executeBlock,
