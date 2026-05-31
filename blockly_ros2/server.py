@@ -107,18 +107,10 @@ class BlocklyServer(Node):
 
             """
             {
-                "memA": {
-                    "type": "float",
-                    "name": "FLOAT_MSG"
-                },
+                "memA": {"type": "float", "name": "FLOAT_MSG"},
                 "mini": {
-                    "mini_memB": {
-                        "type": "string", "name": "STR_MSGB"
-                    },
-                    "mini_memC": {
-                        "type": "string",
-                        "name": "STR_MSGB"
-                    }
+                    "mini_memB": {"type": "string", "name": "STR_MSGB"},
+                    "mini_memC": {"type": "string", "name": "STR_MSGB"},
                 }
             }
             --> 変換 -->
