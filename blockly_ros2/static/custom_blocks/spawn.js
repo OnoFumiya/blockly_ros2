@@ -83,9 +83,9 @@ async function executeSpawn(block) {
   const spawn___y =
     block.getFieldValue("SPAWN___Y");
 
+  console.log(spawn___name);
   console.log(spawn___x);
   console.log(spawn___y);
-  console.log(spawn___name);
 
   await sendSpawn(block);
 
