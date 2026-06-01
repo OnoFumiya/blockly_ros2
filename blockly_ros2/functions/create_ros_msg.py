@@ -65,17 +65,19 @@ def set_members(data, msg, members, topic_name):
                 sec += 1
                 nanosec -= 1_000_000_000
             value = Duration(sec=sec, nanosec=nanosec)
+        elif ((msg_type == "deg") or (msg_type == "degree")):
+            value = float(data.get(get_namespace, 0.0)) * math.pi / 180.0
         else:
             pass
             # TODO: List of (int or float or str)
         
         if (value is not None):
             if (mem_dict[-1] == ""):
-                target = value
+                msg = value
             else:
                 setattr(target, mem_dict[-1], value)
 
-    return target
+    return msg
 
 
 def create_send_message(data, msg_type, members, mode, topic_name):
