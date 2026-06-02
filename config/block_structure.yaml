@@ -61,7 +61,7 @@ spawn:
 ##############
 # ~~~ Action (Client)の例 ~~~
 # ターミナル上 : `~$ ros2 action send_goal /fibonacci action_tutorials_interfaces/action/Fibonacci "order: 1"`
-# 上記と同様のコマンドをするブロックが以下となる (※5.2, 5.8, "ROBOT1"はUIで入力する。thetaなにもしないため定義しない。)
+# 上記と同様のコマンドをするブロックが以下となる (※1はUIで入力する。)
 # TODO: default値(Blockにならない値)の設定
 # value_rules:以下、メンバ変数
 #    "int"型で'order'をブロック上に置く。UI上のブロックでは"計算したい回数 >> "と表記
