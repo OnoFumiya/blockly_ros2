@@ -41,7 +41,7 @@ number:
 
 ##############
 # ~~~ Service (Client)の例 ~~~
-# ターミナル上 : `~$ ros2 service call /spawn turtlesim/srv/Spawn '{x: 5.2, y: 5.8, theta: 0.0, name: "ROBOT1"}'`
+# ターミナル上 : `~$ ros2 service call /spawn turtlesim_msgs/srv/Spawn '{x: 5.2, y: 5.8, theta: 0.0, name: "ROBOT1"}'`
 # 上記と同様のコマンドをするブロックが以下となる (※5.2, 5.8, "ROBOT1"はUIで入力する。thetaなにもしないため定義しない。)
 # TODO: default値(Blockにならない値)の設定
 # value_rules:以下、メンバ変数
@@ -50,7 +50,7 @@ number:
 #    "float"型で'y'をブロック上に置く。UI上のブロックでは"Y座標"と表記
 ##############
 spawn: 
-    msg_type: "turtlesim.Spawn"   # 区切りは"."でも良い
+    msg_type: "turtlesim_msgs.Spawn"   # 区切りは"."でも良い
     mode: "service"
     value_rules: 
         name: {"type": "string", "name": "Name: "}
@@ -60,14 +60,14 @@ spawn:
 
 ##############
 # ~~~ Action (Client)の例 ~~~
-# ターミナル上 : `~$ ros2 action send_goal /fibonacci action_tutorials_interfaces/action/Fibonacci "order: 1"`
-# 上記と同様のコマンドをするブロックが以下となる (※5.2, 5.8, "ROBOT1"はUIで入力する。thetaなにもしないため定義しない。)
+# ターミナル上 : `~$ ros2 action send_goal /fibonacci example_interfaces/action/Fibonacci "order: 1"`
+# 上記と同様のコマンドをするブロックが以下となる (※1はUIで入力する。)
 # TODO: default値(Blockにならない値)の設定
 # value_rules:以下、メンバ変数
 #    "int"型で'order'をブロック上に置く。UI上のブロックでは"計算したい回数 >> "と表記
 ##############
 "/fibonacci": # 明示的にGlobal化("/")させることも可能
-    msg_type: "action_tutorials_interfaces/Fibonacci"
+    msg_type: "example_interfaces/Fibonacci"
     mode: "action"
     value_rules:
         order: {"type": "int", "name": "計算したい回数 >> "}
