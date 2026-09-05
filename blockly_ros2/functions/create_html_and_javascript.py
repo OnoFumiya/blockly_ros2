@@ -55,17 +55,96 @@ def create_file(base_file_path, create_file_dir, create_file_name, options={}):
 
         s = before_loop + temp_s + after_loop
 
+    if ((create_file_name != "main.js") and (".js" in create_file_name)):
+        s = loop_block_create_sentence(s)
+
     with open(create_file_dir + "/" + create_file_name, mode='w') as f:
         f.write(s)
 
 
+def loop_block_create_sentence(sentence):
+    split_sentence = sentence.split("\n")
+
+    stack_index = []
+    for i in range(len(split_sentence)):
+        if (("[" in split_sentence[i]) and ("]" in split_sentence[i])):
+            num = (split_sentence[i].split("[")[1]).split("]")[0]
+
+            if (num.isnumeric()):
+                num = int(num)
+            else:
+                continue
+
+            if (": block.getFieldValue" in split_sentence[i]):
+                stack_index += [{"addition_flag": False, "pair_flag": True, "index": [i, i+1], "num": num}]
+            elif ("const " in split_sentence[i]):
+                stack_index += [{"addition_flag": False, "pair_flag": False, "index": [i, i+2], "num": num}]
+            elif ("console.log" in split_sentence[i]):
+                stack_index += [{"addition_flag": False, "pair_flag": False, "index": [i, i+1], "num": num}]
+            elif ("block.getFieldValue" not in split_sentence[i]):
+                j = 1
+                while True:
+                    if ((i - j) < 0):
+                        return sentence
+
+                    if (".appendField" in split_sentence[i - j]):
+                        break
+
+                    j += 1
+
+                stack_index += [{"addition_flag": True, "pair_flag": False, "index": [i - j, i + 1], "num": num}]
+
+    if (len(stack_index) == 0):
+        return sentence
+
+    replaced_sentence = []
+    i = 0
+    while (i < len(split_sentence)):
+        sel_index_info = None
+        for index_info in stack_index:
+            if ((index_info["index"][0] <= i) and (i <= index_info["index"][1])):
+                sel_index_info = index_info
+                break
+
+        if (sel_index_info is None):
+            replaced_sentence += [split_sentence[i]]
+
+        else:
+            if (sel_index_info["addition_flag"]):
+                replaced_sentence[-2] = replaced_sentence[-2] + ";"
+                replaced_sentence = replaced_sentence[:-1] + ["    this.appendDummyInput()"] + [replaced_sentence[-1]]
+
+            for num in range(sel_index_info["num"]):
+                for j in range(sel_index_info["index"][0], sel_index_info["index"][1] + 1):
+                    if (sel_index_info["pair_flag"]):
+                        temp_reppaced = split_sentence[j].split(": block.getFieldValue")
+                        if (len(temp_reppaced) < 2):
+                            replaced_sentence += [split_sentence[j]]
+                        else:
+                            temp_reppaced[0] = temp_reppaced[0].split("[" + str(sel_index_info["num"]))[0] + "__" + str(num) + "__" + ("[" + str(sel_index_info["num"])).join(temp_reppaced[0].split("[" + str(sel_index_info["num"]))[1:])[1:]
+                            temp_reppaced[1] = temp_reppaced[1].split("[" + str(sel_index_info["num"]))[0] + "__" + str(num) + "__" + ("[" + str(sel_index_info["num"])).join(temp_reppaced[1].split("[" + str(sel_index_info["num"]))[1:])[1:]
+                            replaced_sentence += [temp_reppaced[0] + ": block.getFieldValue" + temp_reppaced[1]]
+                    else:
+                        if ("[" + str(sel_index_info["num"]) in split_sentence[j]):
+                            replaced_sentence += [split_sentence[j].split("[" + str(sel_index_info["num"]))[0] + "__" + str(num) + "__" + ("[" + str(sel_index_info["num"])).join(split_sentence[j].split("[" + str(sel_index_info["num"]))[1:])[1:]]
+                        else:
+                            replaced_sentence += [split_sentence[j]]
+
+            i = index_info["index"][1]
+
+        i += 1
+
+    sentence = "\n".join(replaced_sentence)
+    # return sentence
+    return loop_block_create_sentence(sentence)
+
+
 def clear_dir(set_dir_path):
-    shutil.rmtree(set_dir_path)
-    os.mkdir(set_dir_path)
+    # shutil.rmtree(set_dir_path)
+    # os.mkdir(set_dir_path)
+    pass
 
 
 if __name__ == "__main__":
     base_dir_path, create_dir_path = get_directory_path()
-    # clear_dir(create_dir_path)
-    # create_file(base_dir_path + "/custom_block.js", create_dir_path + "/custom_blocks", "spawn.js", {'name': {'type': 'string', 'name': 'Name: '}, 'x': {'type': 'float', 'name': 'X: '}, 'y': {'type': 'float', 'name': 'Y: '}})
-    create_file(base_dir_path + "/index.html", create_dir_path, "index.html", {'TOOO': {"name": "TOOO"}, 'JJJJ': {"name": "JJJJ"}})
+    # create_file(base_dir_path + "/index.html", create_dir_path, "index.html", {'TOOO': {"name": "TOOO"}, 'JJJJ': {"name": "JJJJ"}})

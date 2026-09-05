@@ -7,6 +7,8 @@ import "./custom_blocks/spawn.js";
 
 import "./custom_blocks/fibonacci.js";
 
+import "./custom_blocks/joint_controllerjoint_trajectory.js";
+
 import "./core/blocks.js";
 import {
   executeBlock,
