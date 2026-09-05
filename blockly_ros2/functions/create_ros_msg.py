@@ -111,7 +111,8 @@ def set_members(data, msg, members, topic_name):
                 setattr(target, temp_attr, temp_value)
                 target = temp_value[num]
             else:
-                setattr(target, attr, value)
+                if (i == len(mem_dict) - 1):
+                    setattr(target, attr, value)
                 target = getattr(target, attr)
 
     return msg
