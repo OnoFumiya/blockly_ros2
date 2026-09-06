@@ -140,9 +140,8 @@ def loop_block_create_sentence(sentence):
 
 
 def clear_dir(set_dir_path):
-    # shutil.rmtree(set_dir_path)
-    # os.mkdir(set_dir_path)
-    pass
+    shutil.rmtree(set_dir_path)
+    os.mkdir(set_dir_path)
 
 
 if __name__ == "__main__":
