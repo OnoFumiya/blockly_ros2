@@ -71,3 +71,24 @@ spawn:
     mode: "action"
     value_rules:
         order: {"type": "int", "name": "計算したい回数 >> "}
+
+
+##############
+# ~~~ 配列を含むメッセージ(Topic Publisher)の例 ~~~
+# ターミナル上 : `~$ ros2 topic pub /joint_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "{joint_names: [joint1, joint2], points: [{positions: [1.2, 0.7], time_from_start: {sec: 1, nanosec: 0}}]}" --once`
+# 上記と同様のコマンドをするブロックが以下となる (※joint1, joint2, 1.2, 0.7, 1, 0はUIで入力する。)
+# TODO: default値(Blockにならない値)の設定
+# value_rules:以下、メンバ変数
+#    "string"型の最大要素数3のリストで'joint_names'をブロック上に置く。UI上のブロックでは"ジョイント名"と表記
+#    positionsやtime_from_startをひとかたまりとしたリストを最大要素数1で'points'をブロック上に置く。
+#    "float"型の最大要素数3のリストで'positions'をブロック上に置く。UI上のブロックでは"角度"と表記
+#    "time"型で'time_from_start'をブロック上に置く。UI上のブロックでは"移動時間"と表記
+##############
+"joint_controller/joint_trajectory":
+    msg_type: "trajectory_msgs/msg/JointTrajectory"
+    mode: "topic"
+    value_rules:
+        joint_names[3]: {"type": "string", "name": "ジョイント名"}
+        points[1]:
+            positions[3]: {"type": "deg", "name": "角度"}
+            time_from_start: {"type": "time", "name": "移動時間"}
