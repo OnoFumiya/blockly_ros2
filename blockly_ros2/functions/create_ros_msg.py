@@ -60,13 +60,33 @@ def get_value(data, mem, msg_type):
     return value
 
 
+def replace_key(key):
+    replaced_key = ""
+    split_key = key.split("__")
+
+    num_input = True
+    for k in split_key:
+        if (k.isnumeric()):
+            replaced_key += "__" + k + "__"
+            num_input = True
+        else:
+            if num_input:
+                num_input = False
+            else:
+                replaced_key += "."
+            replaced_key += k
+
+    return replaced_key
+
+
 def set_members(data, msg, members, topic_name):
 
     end_flag = False
     temp_data = data.copy()
     data = {}
     for key, value in temp_data.items():
-        data[key.replace(topic_name.replace("/", "") + "___", "").replace("____", "__.")] = value
+        replaced_key = replace_key(key.replace(topic_name.replace("/", "") + "___", ""))
+        data[replaced_key] = value
 
     while (not end_flag):
         end_flag = True
@@ -82,6 +102,7 @@ def set_members(data, msg, members, topic_name):
             else:
                 replaced_members[mem] = msg_type
         members = replaced_members
+
 
     for mem, msg_type in members.items():
 
@@ -108,7 +129,8 @@ def set_members(data, msg, members, topic_name):
                     add_msg = getattr(module, add_msg_type.split("/")[1])()
                     if (len(temp_value.__class__()) <= num):
                         temp_value.extend([add_msg] * (num - len(temp_value) + 1))
-                setattr(target, temp_attr, temp_value)
+                if (i == len(mem_dict) - 1):
+                    setattr(target, temp_attr, temp_value)
                 target = temp_value[num]
             else:
                 if (i == len(mem_dict) - 1):
