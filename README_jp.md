@@ -76,7 +76,7 @@ GoogleのBlocklyを基盤としたビジュアルプログラミングインタ�
     ```
 2. 本リポジトリを`src`直下にclone
     ```sh
-    $ git clone -b jazzy-devel https://github.com/OnoFumiya/blockly_ros2.git
+    $ git clone -b lyrical-devel https://github.com/OnoFumiya/blockly_ros2.git
     ```
 3. 本リポジトリへ移動
     ```sh

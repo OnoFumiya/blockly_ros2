@@ -76,7 +76,7 @@ First, prepare the following environment before proceeding to the installation s
     ```
 2. Clone the ROS package `blockly_ros2` into the `src` folder.
     ```sh
-    $ git clone -b jazzy-devel https://github.com/OnoFumiya/blockly_ros2.git
+    $ git clone -b lyrical-devel https://github.com/OnoFumiya/blockly_ros2.git
     ```
 3. Navigate into the cloned repository folder.
     ```sh
