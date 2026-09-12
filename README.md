@@ -351,6 +351,7 @@ Below is the list of supported `type` options for block input fields. Generally,
 - [ ] Support handling Service Responses as well as Action Feedback / Results within blocks.
 - [ ] Implement saving and loading block workspaces to allow users to resume their work.
 - [ ] Enhance variable management in Blockly to improve the usability of loop iterations and conditional (IF) blocks.
+- [ ] Proposal and Implementation of a Method for Defining Dynamic Arrays.
 
 Please check the [Issue page][issues-url] for current bugs and feature requests.
 

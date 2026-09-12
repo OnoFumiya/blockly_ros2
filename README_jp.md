@@ -353,6 +353,7 @@ Block 上の入力フィールドに指定できる `type` の一覧です。基
 - [ ] Service通信のResponse、およびAction通信のFeedback / Resultの取得・Block側への反映
 - [ ] 作成したBlockの保存機能、および保存した状態からの再開（プロジェクトの復元）機能の実装
 - [ ] Blocklyにおける変数保持機能の実装、および繰り返し（Loop）処理や条件分岐（IF）ブロックの使い勝手の向上
+- [ ] 動的な配列について定義方法の提案・実装
 
 Please check the [Issue page][issues-url] for current bugs and feature requests.
 
