@@ -17,7 +17,7 @@ Blockly.Blocks['send_number'] = {
 
     this.appendDummyInput()
       
-      .appendField("数値: ")
+      .appendField("No. ")
       .appendField(
         
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),

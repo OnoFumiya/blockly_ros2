@@ -28,7 +28,7 @@ Blockly.Blocks['send_spawn'] = {
         "SPAWN___NAME"
       )
       
-      .appendField("X座標")
+      .appendField("X: ")
       .appendField(
         
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),
@@ -39,7 +39,7 @@ Blockly.Blocks['send_spawn'] = {
         "SPAWN___X"
       )
       
-      .appendField("Y座標")
+      .appendField("Y: ")
       .appendField(
         
         new Blockly.FieldNumber(0.0, -Infinity, Infinity, 0.001),

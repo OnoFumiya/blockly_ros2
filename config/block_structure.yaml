@@ -16,27 +16,27 @@
 # ターミナル上 : `~$ ros2 topic pub /text std_msgs/msg/String 'data: "Hello World"' --once`
 # 上記と同様のコマンドをするブロックが以下となる (※"Hello World"はUIで入力する)
 # value_rules:以下、メンバ変数
-#    "string"型で'data'をブロック上に置く。UI上のブロックでは"テキスト"と表記
+#    "string"型で'data'をブロック上に置く。UI上のブロックでは"MESSAGE: "と表記
 ##############
 text:
     msg_type: "std_msgs/String"
     mode: "topic"
     value_rules:
-        data: {type: "string", name: "テキスト"}
+        data: {type: "string", name: "MESSAGE: "}
 
 
 ##############
 # ~~~ Topic (Publisher)の例 ~~~
-# ターミナル上 : `~$ ros2 topic pub /text std_msgs/msg/Float64 'data: 1.57' --once`
+# ターミナル上 : `~$ ros2 topic pub /number std_msgs/msg/Float64 'data: 1.57' --once`
 # 上記と同様のコマンドをするブロックが以下となる (※1.57はUIで入力する)
 # value_rules:以下、メンバ変数
-#    "foat"型で'data'をブロック上に置く。UI上のブロックでは"数値: "と表記
+#    "foat"型で'data'をブロック上に置く。UI上のブロックでは"No. "と表記
 ##############
 number:
     msg_type: "std_msgs/msg/Float64"  # msgやsrvやactionを入れても良い
     mode: "topic"
     value_rules:
-        data: {type: "float", "name": "数値: "}
+        data: {type: "float", "name": "No. "}
 
 
 ##############
@@ -46,16 +46,16 @@ number:
 # TODO: default値(Blockにならない値)の設定
 # value_rules:以下、メンバ変数
 #    "string"型で'name'をブロック上に置く。UI上のブロックでは"Name: "と表記
-#    "float"型で'x'をブロック上に置く。UI上のブロックでは"X座標"と表記
-#    "float"型で'y'をブロック上に置く。UI上のブロックでは"Y座標"と表記
+#    "float"型で'x'をブロック上に置く。UI上のブロックでは"X: "と表記
+#    "float"型で'y'をブロック上に置く。UI上のブロックでは"Y: "と表記
 ##############
 spawn: 
     msg_type: "turtlesim_msgs.Spawn"   # 区切りは"."でも良い
     mode: "service"
     value_rules: 
         name: {"type": "string", "name": "Name: "}
-        x: {"type": "float", "name": "X座標"}
-        y: {"type": "float", "name": "Y座標"}
+        x: {"type": "float", "name": "X: "}
+        y: {"type": "float", "name": "Y: "}
 
 
 ##############
@@ -64,31 +64,31 @@ spawn:
 # 上記と同様のコマンドをするブロックが以下となる (※1はUIで入力する。)
 # TODO: default値(Blockにならない値)の設定
 # value_rules:以下、メンバ変数
-#    "int"型で'order'をブロック上に置く。UI上のブロックでは"計算したい回数 >> "と表記
+#    "int"型で'order'をブロック上に置く。UI上のブロックでは"Number of calculations >> "と表記
 ##############
 "/fibonacci": # 明示的にGlobal化("/")させることも可能
     msg_type: "example_interfaces/Fibonacci"
     mode: "action"
     value_rules:
-        order: {"type": "int", "name": "計算したい回数 >> "}
+        order: {"type": "int", "name": "Number of calculations >> "}
 
 
 ##############
 # ~~~ 配列を含むメッセージ(Topic Publisher)の例 ~~~
-# ターミナル上 : `~$ ros2 topic pub /joint_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "{joint_names: [joint1, joint2], points: [{positions: [1.2, 0.7], time_from_start: {sec: 1, nanosec: 0}}]}" --once`
-# 上記と同様のコマンドをするブロックが以下となる (※joint1, joint2, 1.2, 0.7, 1, 0はUIで入力する。)
+# ターミナル上 : `~$ ros2 topic pub /joint_controller/joint_trajectory trajectory_msgs/msg/JointTrajectory "{joint_names: [joint1, joint2, joint3], points: [{positions: [1.2, 0.7, -0.8], time_from_start: {sec: 1, nanosec: 0}}]}" --once`
+# 上記と同様のコマンドをするブロックが以下となる (※joint1, joint2, joint3, 1.2, 0.7, -0.8, 1, 0はUIで入力する。)
 # TODO: default値(Blockにならない値)の設定
 # value_rules:以下、メンバ変数
-#    "string"型の最大要素数3のリストで'joint_names'をブロック上に置く。UI上のブロックでは"ジョイント名"と表記
+#    "string"型の最大要素数3のリストで'joint_names'をブロック上に置く。UI上のブロックでは"JOINT NAMES=>>"と表記
 #    positionsやtime_from_startをひとかたまりとしたリストを最大要素数1で'points'をブロック上に置く。
-#    "float"型の最大要素数3のリストで'positions'をブロック上に置く。UI上のブロックでは"角度"と表記
-#    "time"型で'time_from_start'をブロック上に置く。UI上のブロックでは"移動時間"と表記
+#    "float"型の最大要素数3のリストで'positions'をブロック上に置く。UI上のブロックでは"Angles[rad]=>>"と表記
+#    "time"型で'time_from_start'をブロック上に置く。UI上のブロックでは"movement time[s]: "と表記
 ##############
 "joint_controller/joint_trajectory":
     msg_type: "trajectory_msgs/msg/JointTrajectory"
     mode: "topic"
     value_rules:
-        joint_names[3]: {"type": "string", "name": "ジョイント名"}
+        joint_names[3]: {"type": "string", "name": "JOINT NAMES=>>"}
         points[1]:
-            positions[3]: {"type": "deg", "name": "角度"}
-            time_from_start: {"type": "time", "name": "移動時間"}
+            positions[3]: {"type": "deg", "name": "Angles[rad]=>>"}
+            time_from_start: {"type": "time", "name": "movement time[s]: "}

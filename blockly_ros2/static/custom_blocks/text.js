@@ -17,7 +17,7 @@ Blockly.Blocks['send_text'] = {
 
     this.appendDummyInput()
       
-      .appendField("テキスト")
+      .appendField("MESSAGE: ")
       .appendField(
         
         

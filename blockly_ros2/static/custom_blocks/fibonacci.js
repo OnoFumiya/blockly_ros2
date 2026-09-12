@@ -17,7 +17,7 @@ Blockly.Blocks['send_fibonacci'] = {
 
     this.appendDummyInput()
       
-      .appendField("計算したい回数 >> ")
+      .appendField("Number of calculations >> ")
       .appendField(
         new Blockly.FieldNumber(0, -Infinity, Infinity, 1),
         

@@ -18,7 +18,7 @@ Blockly.Blocks['send_joint_controllerjoint_trajectory'] = {
     this.appendDummyInput()
       ;
     this.appendDummyInput()
-      .appendField("ジョイント名")
+      .appendField("JOINT NAMES=>>")
       .appendField(
         
         
@@ -49,7 +49,7 @@ Blockly.Blocks['send_joint_controllerjoint_trajectory'] = {
       ;
     this.appendDummyInput();
     this.appendDummyInput()
-      .appendField("角度")
+      .appendField("Angles[rad]=>>")
       .appendField(
         
         
@@ -79,7 +79,7 @@ Blockly.Blocks['send_joint_controllerjoint_trajectory'] = {
       )
       ;
     this.appendDummyInput()
-      .appendField("移動時間")
+      .appendField("movement time[s]: ")
       .appendField(
         
         
