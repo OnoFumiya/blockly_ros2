@@ -5,7 +5,7 @@ from rclpy.action import ActionClient
 import os
 import copy
 import time
-from subprocess import Popen
+from subprocess import Popen, DEVNULL
 
 from ament_index_python.packages import get_package_share_directory
 import yaml
@@ -202,7 +202,7 @@ class BlocklyServer(Node):
         self.comm_ctrl.uipath_publish(url, ros_img)
 
         if (self.get_parameter("ui_bringup").get_parameter_value().bool_value):
-            Popen(["xdg-open", url]) # bringup the engine
+            Popen(["xdg-open", url], stderr=DEVNULL) # bringup the engine
 
         self.app.run(
             host="0.0.0.0",
