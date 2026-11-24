@@ -3,9 +3,11 @@
 <package format="3">
   <name>blockly_ros2</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>
+    A ROS 2 package providing a visual programming interface powered by Google's Blockly.
+  </description>
   <maintainer email="fumiyaono.choi@gmail.com">fumiya</maintainer>
-  <license>TODO: License declaration</license>
+  <license>BSD-3-Clause</license>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
